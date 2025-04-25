@@ -1,0 +1,143 @@
+//Variables
+$primary-color: rgba(220,20,10,255);
+$background-color: #fff;
+$secondary-color: #f5f5f5;
+$border-color: #eaeaea;
+$text-color: #000;
+$border-radius: 4px;
+
+//Fonts
+$base-font-size: 1.5rem;
+
+// Breakpoints
+$tablet: 768px;
+$desktop: 992px;
+
+// Mixins
+@mixin responsive($breakpoint) {
+    @if $breakpoint == tablet {
+        @media (min-width: $tablet) {
+            @content;
+        }
+    } 
+    @else if $breakpoint == desktop {
+        @media (min-width: $desktop) {
+            @content;
+        }
+    }
+}
+
+// Reset and base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: $base-font-size;
+  line-height: 1.6;
+  color: $text-color;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+h2 {
+    color: $primary-color;
+}
+
+//utility classes
+.u-hide-tablet {
+    display: none;
+
+    @include responsive(desktop) {
+        display: block;
+    }
+}
+
+.c-app {
+    min-height: 100vh;
+    display: flex;
+}
+
+.c-main {
+    background-color: $primary-color;
+    flex: 1;
+}
+
+// Container
+.o-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @include responsive(desktop) {
+    max-width: 1400px;
+  }
+}
+
+//header 
+.c-header {
+    padding: 1rem;
+}
+
+.c-page {
+    background-color: $background-color;
+    padding: 2rem 1rem;
+}
+
+.c-hotel-page {
+    display: flex;
+    padding: 1rem 0;
+}
+
+.c-filter {
+    width: 300px;
+    padding: 1rem;
+    border-radius: $border-radius;
+    background-color: $secondary-color;
+}
+
+.c-card {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: 0.4rem;
+
+    @include responsive(tablet) {
+        display: flex;
+    }
+}
+
+.c-card__container {
+    flex: 1;
+    margin-left: 2rem;
+}
+
+.c-card__image {
+    height: 200px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @include responsive(tablet) {
+        width: 400px;
+    }
+}
+
+.c-card__detail {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.c-card__info {
+    padding: 1rem;
+}
