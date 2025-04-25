@@ -8,6 +8,7 @@ $border-radius: 4px;
 
 //Fonts
 $base-font-size: 1.5rem;
+$large-font-size: 2.2rem;
 
 // Breakpoints
 $tablet: 768px;
@@ -25,6 +26,11 @@ $desktop: 992px;
             @content;
         }
     }
+}
+
+@mixin justifyFlex($justify:center) {
+    display: flex;
+    justify-content: $justify;
 }
 
 // Reset and base styles
@@ -52,6 +58,7 @@ img {
 
 h2 {
     color: $primary-color;
+    font-size: $large-font-size;
 }
 
 //utility classes
@@ -87,6 +94,15 @@ h2 {
 //header 
 .c-header {
     padding: 1rem;
+    @include justifyFlex();
+
+    @include responsive(desktop) {
+        display: block;
+      }
+}
+
+.c-logo {
+    text-align: center;
 }
 
 .c-page {
@@ -133,11 +149,20 @@ h2 {
 }
 
 .c-card__detail {
-    display: flex;
-    justify-content: space-between;
+    @include justifyFlex(space-between);
     flex: 1;
 }
 
 .c-card__info {
     padding: 1rem;
+}
+
+.c-card__price {
+    background-color: $secondary-color;
+    width: 150px;
+    justify-content: flex-end;
+    display: flex;
+    padding: 2rem 1rem 0 0;
+    font-size: 2.2rem;
+    font-weight: bold;
 }
