@@ -3,7 +3,10 @@ $primary-color: rgba(220,20,10,255);
 $background-color: #fff;
 $secondary-color: #f5f5f5;
 $border-color: #eaeaea;
-$text-color: #000;
+$text-color: #373131;
+$text-color-secondary: #8f9395;
+$text-color-tertiary: #e8f0eb;
+$rating-color: #feb42b;
 $border-radius: 4px;
 
 //Fonts
@@ -142,6 +145,7 @@ h2 {
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: cover;
+    border-radius: 2px;
 
     @include responsive(tablet) {
         width: 400px;
@@ -165,4 +169,41 @@ h2 {
     padding: 2rem 1rem 0 0;
     font-size: 2.2rem;
     font-weight: bold;
+}
+
+.c-card__text {
+    font-size: 1.1rem;
+    color: $text-color-secondary;
+
+    &-type {
+        font-weight: bold;
+    }
+}
+
+.c-card__rating {
+    display: flex;
+    margin: 0.8rem 0;
+}
+
+.c-card__diamonds {
+    width: 8px;
+    height: 8px;
+    background-color: $rating-color; 
+    transform: rotate(45deg);
+    display: inline-block;
+    margin-right: 6px;
+
+    &--half {
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            transform: rotate(-90deg);
+            width: 0px;
+            height: 0;
+            border-bottom: 9px solid $background-color;
+            border-left: 10px solid transparent;
+        }
+    }
 }
