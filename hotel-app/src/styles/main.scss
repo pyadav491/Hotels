@@ -3,14 +3,17 @@ $primary-color: rgba(220,20,10,255);
 $background-color: #fff;
 $secondary-color: #f5f5f5;
 $border-color: #eaeaea;
+$border-color-dark: #d3d3d3;
 $text-color: #373131;
 $text-color-secondary: #8f9395;
-$text-color-tertiary: #e8f0eb;
 $rating-color: #feb42b;
 $border-radius: 4px;
 
 //Fonts
 $base-font-size: 1.5rem;
+$small-font-size: 1.3rem;
+$tiny-font-size: 1.2rem;
+$mini-font-size: 1.1rem;
 $large-font-size: 2.2rem;
 
 // Breakpoints
@@ -31,9 +34,14 @@ $desktop: 992px;
     }
 }
 
-@mixin justifyFlex($justify:center) {
+@mixin justifyFlex($justify: center) {
     display: flex;
     justify-content: $justify;
+}
+
+@mixin alignFlex($align: center) {
+    display: flex;
+    align-items: $align;
 }
 
 // Reset and base styles
@@ -64,6 +72,18 @@ h2 {
     font-size: $large-font-size;
 }
 
+h3 {
+    font-size: $small-font-size;
+}
+
+h4 {
+    font-size: $mini-font-size;
+}
+
+h5 {
+    font-size: $tiny-font-size;
+}
+
 //utility classes
 .u-hide-tablet {
     display: none;
@@ -92,6 +112,11 @@ h2 {
   @include responsive(desktop) {
     max-width: 1400px;
   }
+}
+
+.o-button {
+    border: none;
+    background-color: transparent;
 }
 
 //header 
@@ -169,10 +194,11 @@ h2 {
     padding: 2rem 1rem 0 0;
     font-size: 2.2rem;
     font-weight: bold;
+    margin-right: 0.5rem;
 }
 
 .c-card__text {
-    font-size: 1.1rem;
+    font-size: $mini-font-size;
     color: $text-color-secondary;
 
     &-type {
@@ -206,4 +232,65 @@ h2 {
             border-left: 10px solid transparent;
         }
     }
+}
+
+.c-filter__title {
+    padding: 0 1rem;
+}
+
+.c-filter-section {
+    border-top: 1px solid $border-color;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.c-filter-section__search {
+    border: 1px solid $border-color-dark;
+    display: flex;
+
+    input {
+        border: none;
+    }
+}
+
+.c-filter-section__button {
+    padding: 1.2rem 2rem;
+    height: 4rem;
+    border-left: 1px solid $border-color;
+}
+
+.c-input {
+    padding: 1rem;
+    height: 4rem;
+    border: 1px solid $border-color;
+    width: 100%;
+}
+
+.c-input__container {
+    width: 100%;
+}
+
+.c-accordion__icon {
+    width: 0;
+    height: 0;
+    border-top: 4px solid $text-color-secondary;;
+    border-bottom: 4px solid transparent;
+    display: inline-block;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    margin-right: 0.5rem;
+}
+
+.c-accordion__header {
+    @include alignFlex();
+    padding-bottom: 1.6rem;
+    width: 100%;
+}
+
+.c-accordion__title {
+    color: $text-color-secondary;
+}
+
+.c-accordion__content {
+    padding: 0 1.2rem;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 const Card = ({
     name, 
@@ -28,7 +29,7 @@ const Card = ({
             <div className="c-card__image" style={{backgroundImage:`url(${image})`}} />
             <div className="c-card__detail">
                 <div className="c-card__info">
-                    <h5>{name}</h5>
+                    <h3>{name}</h3>
                     <span className="c-card__rating">
                         {ratingDiamonds(rating)}
                     </span>
@@ -44,5 +45,13 @@ const Card = ({
         </div>
     )
 }
+
+Card.propTypes = {
+    name: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    roomType: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+};
 
 export default Card;
