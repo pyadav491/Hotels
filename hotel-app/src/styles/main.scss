@@ -4,10 +4,14 @@ $background-color: #fff;
 $secondary-color: #f5f5f5;
 $border-color: #eaeaea;
 $border-color-dark: #d3d3d3;
+$border-checkbox: #333;
 $text-color: #373131;
 $text-color-secondary: #8f9395;
 $rating-color: #feb42b;
 $border-radius: 4px;
+$checkbox-color: #000;
+$checbox-icon-color: #fff;
+$button-color: green;
 
 //Fonts
 $base-font-size: 1.5rem;
@@ -44,6 +48,12 @@ $desktop: 992px;
     align-items: $align;
 }
 
+@mixin flexCenter() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 // Reset and base styles
 * {
   margin: 0;
@@ -60,6 +70,15 @@ body {
   font-size: $base-font-size;
   line-height: 1.6;
   color: $text-color;
+}
+
+a {
+    text-decoration: none;
+    color: $text-color;
+
+    &:active {
+        color: $text-color
+    }
 }
 
 img {
@@ -84,15 +103,6 @@ h5 {
     font-size: $tiny-font-size;
 }
 
-//utility classes
-.u-hide-tablet {
-    display: none;
-
-    @include responsive(desktop) {
-        display: block;
-    }
-}
-
 .c-app {
     min-height: 100vh;
     display: flex;
@@ -103,7 +113,7 @@ h5 {
     flex: 1;
 }
 
-// Container
+// Objects
 .o-container {
   width: 100%;
   margin: 0 auto;
@@ -119,12 +129,36 @@ h5 {
     background-color: transparent;
 }
 
+
+.o-diamond {
+    width: 7px;
+    height: 7px;
+    background-color: $rating-color; 
+    transform: rotate(45deg);
+    display: inline-block;
+    margin-right: 6px;
+
+    &--half {
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            transform: rotate(-90deg);
+            width: 0px;
+            height: 0;
+            border-bottom: 9px solid $background-color;
+            border-left: 10px solid transparent;
+        }
+    }
+}
+
 //header 
 .c-header {
     padding: 1rem;
     @include justifyFlex();
 
-    @include responsive(desktop) {
+    @include responsive(tablet) {
         display: block;
       }
 }
@@ -143,11 +177,23 @@ h5 {
     padding: 1rem 0;
 }
 
-.c-filter {
-    width: 300px;
-    padding: 1rem;
-    border-radius: $border-radius;
-    background-color: $secondary-color;
+.c-hotel-page__content {
+    width: 100%;
+}
+
+.c-hotel-page__content {
+    @include responsive(desktop) {
+        flex: 1;
+        margin-left: 2rem;
+    }
+}
+
+.c-hotel-page__filter {
+    display: none;
+
+    @include responsive(desktop) {
+        display: block;
+    }
 }
 
 .c-card {
@@ -158,11 +204,6 @@ h5 {
     @include responsive(tablet) {
         display: flex;
     }
-}
-
-.c-card__container {
-    flex: 1;
-    margin-left: 2rem;
 }
 
 .c-card__image {
@@ -184,25 +225,68 @@ h5 {
 
 .c-card__info {
     padding: 1rem;
+    width: 65%;
+
+    @include responsive(desktop) {
+        width: 75%;
+    }
 }
 
 .c-card__price {
     background-color: $secondary-color;
-    width: 150px;
-    justify-content: flex-end;
-    display: flex;
-    padding: 2rem 1rem 0 0;
+    width: 120px;
+    padding: 0 1rem 0 0;
+    align-items: center;
     font-size: 2.2rem;
     font-weight: bold;
-    margin-right: 0.5rem;
+    @include justifyFlex(flex-end);
+
+    @include responsive(tablet) {
+        width: 150px;
+        align-items: normal;
+        padding: 2rem 1rem 0 0;
+    }
+
+    @include responsive(desktop) {
+        margin-right: 0.5rem;
+    }
+}
+
+.c-card__right {
+    display: flex;
+}
+
+.c-card__button {
+    width: 38px;
+    background-color: $button-color;
+    @include flexCenter();
+
+    span {
+        border-right: 5px solid white;
+        border-top: 5px solid transparent;
+        border-left: 5px solid transparent;
+        border-bottom: 5px solid white;
+        margin-left: -5px;
+        transform: rotate(-45deg);
+    }
+
+    @include responsive(tablet) {
+        display: none;
+    }
 }
 
 .c-card__text {
-    font-size: $mini-font-size;
-    color: $text-color-secondary;
+    display: none;
 
-    &-type {
-        font-weight: bold;
+    
+    @include responsive(desktop) {
+        font-size: $mini-font-size;
+        color: $text-color-secondary;
+        display: block;
+    
+        &-type {
+            font-weight: bold;
+        }
     }
 }
 
@@ -211,27 +295,12 @@ h5 {
     margin: 0.8rem 0;
 }
 
-.c-card__diamonds {
-    width: 8px;
-    height: 8px;
-    background-color: $rating-color; 
-    transform: rotate(45deg);
-    display: inline-block;
-    margin-right: 6px;
 
-    &--half {
-        position: relative;
-
-        &::after {
-            content: '';
-            position: absolute;
-            transform: rotate(-90deg);
-            width: 0px;
-            height: 0;
-            border-bottom: 9px solid $background-color;
-            border-left: 10px solid transparent;
-        }
-    }
+.c-filter {
+    width: 300px;
+    padding: 1rem;
+    border-radius: $border-radius;
+    background-color: $secondary-color;
 }
 
 .c-filter__title {
@@ -240,7 +309,7 @@ h5 {
 
 .c-filter-section {
     border-top: 1px solid $border-color;
-    padding-top: 1rem;
+    padding: 1.4rem 0.5rem;
     margin-top: 1rem;
 }
 
@@ -268,6 +337,51 @@ h5 {
 
 .c-input__container {
     width: 100%;
+}
+
+.c-checkbox {
+    margin-bottom: 1rem;
+
+    input {
+        appearance: none;
+
+        &:checked ~ .c-checkbox__icon {
+            background-color: $checkbox-color;
+
+            &::after {
+                border-color: $checbox-icon-color;
+            }
+        }
+    }
+}
+
+.c-checkbox__label {
+    @include alignFlex();
+}
+
+.c-checkbox__icon {
+    width: 18px;
+    height: 18px;
+    border: 1px solid $border-checkbox;
+    border-radius: 2px;
+    margin-right: 1rem;
+    position: relative;
+    background-color: transparent;
+    transition: background-color 0.3s;
+
+    &::after {
+        content: "";
+        position: absolute;
+        border-color: transparent;
+        border-width: 0 3px 3px 0;
+        border-style: solid;
+        width: 3px;
+        height: 8px;
+        transform: rotate(45deg);
+        left: 5px;
+        top: 2px;
+        transition: border-color 0.3s;
+    }
 }
 
 .c-accordion__icon {

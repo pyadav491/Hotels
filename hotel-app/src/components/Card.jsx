@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const Card = ({
+    id,
     name, 
     image, 
     rating, 
@@ -14,35 +16,42 @@ const Card = ({
         const hasHalfdiamonds = rating % 1 !== 0;
 
         for(let i=1; i<=fullDiamonds; i++) {
-            diamonds.push(<span key={i} className="c-card__diamonds"></span>)
+            diamonds.push(<span key={i} className="o-diamond"></span>)
         }
 
         if(hasHalfdiamonds) {
-            diamonds.push(<span key="6" className="c-card__diamonds c-card__diamonds--half"></span>)
+            diamonds.push(<span key="6" className="o-diamond o-diamond--half"></span>)
         }
 
         return diamonds;
     };
 
     return (
-        <div className="c-card">
-            <div className="c-card__image" style={{backgroundImage:`url(${image})`}} />
-            <div className="c-card__detail">
-                <div className="c-card__info">
-                    <h3>{name}</h3>
-                    <span className="c-card__rating">
-                        {ratingDiamonds(rating)}
-                    </span>
-                    <span className="c-card__text">
-                        <span className="c-card__text-type">Room type:</span> 
-                        {roomType}
-                    </span>
-                </div>
-                <div className="c-card__price">
-                    <span>{price}</span>
+        <Link to={`/hotel/${id}`} className="hotel-card-link">
+            <div className="c-card">
+                <div className="c-card__image" style={{backgroundImage:`url(${image})`}} />
+                <div className="c-card__detail">
+                    <div className="c-card__info">
+                        <h3>{name}</h3>
+                        <span className="c-card__rating">
+                            {ratingDiamonds(rating)}
+                        </span>
+                        <span className="c-card__text">
+                            <span className="c-card__text-type">Room type:</span> 
+                            {roomType}
+                        </span>
+                    </div>
+                    <div className="c-card__right">
+                        <div className="c-card__price">
+                            <span>{price}</span>
+                        </div>
+                        <button className="o-button c-card__button"> 
+                            <span />
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 

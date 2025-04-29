@@ -10,8 +10,10 @@ const HotelPage = () => {
       <>
         <h2>550 Hotel Available in Melbourne</h2>
         <div class="c-hotel-page">
-          <Filter />
-          <div className='c-card__container'>
+          <div className="c-hotel-page__filter">
+            <Filter />
+          </div>          
+          <div className='c-hotel-page__content'>
               {hotels.map(hotel => {
                 return (
                   <Card key={hotel.id}
@@ -20,6 +22,7 @@ const HotelPage = () => {
                     roomType={hotel.roomType}
                     rating={hotel.rating}
                     price={hotel.price}
+                    id={hotel.id}
                   />
                 )
               })}

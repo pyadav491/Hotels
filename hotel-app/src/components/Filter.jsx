@@ -5,8 +5,17 @@ import Checkbox from "./base/Form/Checkbox";
 import PropTypes from 'prop-types';
 
 const Filter = ({onChange}) => {
+    const ratings = [5,4,3,2];
+    const ratingDiamonds = (rating) => {
+        let diamonds = [];
+        for(let i=1; i<=rating; i++) {
+            diamonds.push(<span key={i} className="o-diamond"></span>)
+        }
+        return diamonds;
+    };
+
     return(
-        <div className="c-filter u-hide-table">
+        <div className="c-filter">
             <div className="c-filter__title">
                 <h3>Filter Results</h3>
             </div>
@@ -30,9 +39,18 @@ const Filter = ({onChange}) => {
                     title="Quality Rating"
                     expanded={true}
                 >
-                    <div className="c-filter-section__search">
-                        <Checkbox/>   
-                    </div>
+                    <Checkbox
+                        label="All"
+                    />
+                    {ratings.map(rating => {
+                        return (
+                            <Checkbox
+                                onChange={onChange}
+                                value={rating}
+                                label={ratingDiamonds(rating)}
+                            />
+                        )         
+                    })}
                 </Accordion>
             </div>
         </div>
