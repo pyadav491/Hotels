@@ -14,7 +14,7 @@ const HotelDetail = () => {
             <img src={hotel.image} alt={hotel.name} />
         </div>
         <div className="c-hotel-detail__info">
-            <div className="c-hotel-detail__price">{hotel.price} per night</div>
+            <div className="c-hotel-detail__price">${hotel.price} per night</div>
             <div className="c-hotel-detail__room-type">
                 <span className="c-hotel-detail__label">Room type:</span> {hotel.roomType}
             </div>

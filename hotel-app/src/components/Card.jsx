@@ -43,7 +43,7 @@ const Card = ({
                     </div>
                     <div className="c-card__right">
                         <div className="c-card__price">
-                            <span>{price}</span>
+                            <span>${price}</span>
                         </div>
                         <button className="o-button c-card__button"> 
                             <span />
@@ -56,6 +56,7 @@ const Card = ({
 }
 
 Card.propTypes = {
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,

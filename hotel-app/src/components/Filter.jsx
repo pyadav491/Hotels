@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "./base/Form/Input";
 import Accordion from "./base/Accordion";
 import Checkbox from "./base/Form/Checkbox";
 import PropTypes from 'prop-types';
 
-const Filter = ({onChange, filters}) => {
-    const ratings = [5,4,3,2];
+const Filter = ({onFilterChange, filters}) => {
+    const ratingList = [5,4,3,2];
+    const [allSelected, setAllSelected] = useState(true);
+    const [selectedRatings, setSelectedRatings] = useState([]);
+    const [filterName, setFilterName] = useState(filters.name);
     const ratingDiamonds = (rating) => {
         let diamonds = [];
         for(let i=1; i<=rating; i++) {
@@ -13,6 +16,30 @@ const Filter = ({onChange, filters}) => {
         }
         return diamonds;
     };
+
+    const handleRatingChange = (rating, checked) => {
+        const newRatings = checked 
+          ? [...selectedRatings, rating]
+          : selectedRatings.filter(r => r !== rating);
+        
+        setSelectedRatings(newRatings);
+        setAllSelected(false);  
+        onFilterChange('ratings', newRatings); 
+      };
+
+    const handleSelectAll = (checked) => {
+        setAllSelected(checked);
+        setSelectedRatings([]);
+        onFilterChange('ratings', checked ? ratingList : []);
+    }
+
+    const handleFilterName = (e) => {
+        setFilterName(e.target.value);
+    }
+
+    const handleButtonClick = () => {
+        onFilterChange('name', filterName);
+    }
 
     return(
         <div className="c-filter">
@@ -27,11 +54,17 @@ const Filter = ({onChange, filters}) => {
                     <div className="c-filter-section__search">
                         <Input 
                             placeholder="Enter Hotel Name"
-                            value={filters.name}
-                            onChange={onChange}
+                            value={filterName}
+                            onChange={handleFilterName}
+                            //onChange={(e) => onFilterChange('name', e.target.value)}
                             name="name"
                         />
-                        <button className="o-button c-filter-section__button">Go</button>
+                        <button 
+                            className="o-button c-filter-section__button"
+                            onClick={handleButtonClick}
+                        >
+                            Go
+                        </button>
                     </div>
                 </Accordion>
             </div>
@@ -40,20 +73,20 @@ const Filter = ({onChange, filters}) => {
                     title="Quality Rating"
                     expanded={true}
                 >
-                    <Checkbox
-                        label="All"
+                     <Checkbox
+                        label="All Ratings"
+                        onChange={(e) => handleSelectAll(e.target.checked)}
+                        checked={allSelected}
                     />
-                    {ratings.map(rating => {
-                        return (
-                            <Checkbox
-                                key={rating}
-                                onChange={onChange}
-                                value={ratings}
-                                label={ratingDiamonds(rating)}
-                                name="ratings"
-                            />
-                        )         
-                    })}
+                     {ratingList.map((rating) => (
+                        <Checkbox
+                            key={rating}
+                            label={ratingDiamonds(rating)}
+                            onChange={(e) => handleRatingChange(rating, e.target.checked)}
+                            checked={!allSelected && selectedRatings.includes(rating)}
+                            className="rating-option"
+                        />
+                        ))}
                 </Accordion>
             </div>
         </div>
@@ -62,7 +95,7 @@ const Filter = ({onChange, filters}) => {
 
 Filter.propTypes = {
     onChange: PropTypes.func.isRequired,
-    filters: PropTypes.array.isRequired
+    filters: PropTypes.object.isRequired
 };
 
 export default Filter;
