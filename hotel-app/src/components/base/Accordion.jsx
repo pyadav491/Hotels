@@ -6,22 +6,22 @@ const Accordion = ({
   children,
   expanded = true
 }) => {
-    const [collapse, setCollapse] = useState(expanded);
+    const [expand, setExpand] = useState(expanded);
     const toggle = () => {
-        setCollapse(prev => !prev);
+        setExpand(prev => !prev);
       };
 
     return (
         <div className="c-accordion">
         <button 
-            className={`o-button c-accordion__header ${collapse ? 'active' : ''}`}
+            className={`o-button c-accordion__header ${expand ? 'c-accordion__header--active' : ''}`}
             onClick={toggle}
-            aria-expanded={collapse}
+            aria-expanded={expand}
         >
-            <span className={`c-accordion__icon ${collapse ? 'c-accordion__expanded' : ''}`}></span>
+            <span className={`c-accordion__icon ${expand ? 'c-accordion__icon--expand' : ''}`}></span>
             <h4 className="c-accordion__title">{title}</h4>
         </button>
-        {collapse && (
+        {expand && (
             <div className="c-accordion__content">
                 {children}
             </div>

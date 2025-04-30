@@ -10,7 +10,7 @@ const Checkbox = ({
 }) => {
     return (
         <div className="c-checkbox">
-            <label className="c-checkbox__label" for={name}>
+            <label className="c-checkbox__label" htmlFor={name}>
                 <input 
                     type="checkbox"
                     name={name}
@@ -19,7 +19,7 @@ const Checkbox = ({
                     value={value}
                 />
                 <span className="c-checkbox__icon" />
-                <span className="label">{label}</span>
+                <span className="c-checkbox__text">{label}</span>
             </label>
         </div>
     )

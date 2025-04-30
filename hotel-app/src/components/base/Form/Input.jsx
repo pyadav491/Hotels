@@ -9,7 +9,7 @@ const Input = ({
 }) => {
     return (
         <div className="c-input__container">
-            <label className="c-input__label" for={name}/>
+            <label className="c-input__label" htmlFor={name}/>
             <input 
                 type="text"
                 name={name}

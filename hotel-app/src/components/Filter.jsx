@@ -4,7 +4,7 @@ import Accordion from "./base/Accordion";
 import Checkbox from "./base/Form/Checkbox";
 import PropTypes from 'prop-types';
 
-const Filter = ({onChange}) => {
+const Filter = ({onChange, filters}) => {
     const ratings = [5,4,3,2];
     const ratingDiamonds = (rating) => {
         let diamonds = [];
@@ -27,8 +27,9 @@ const Filter = ({onChange}) => {
                     <div className="c-filter-section__search">
                         <Input 
                             placeholder="Enter Hotel Name"
-                            value="Oaks"
+                            value={filters.name}
                             onChange={onChange}
+                            name="name"
                         />
                         <button className="o-button c-filter-section__button">Go</button>
                     </div>
@@ -45,9 +46,11 @@ const Filter = ({onChange}) => {
                     {ratings.map(rating => {
                         return (
                             <Checkbox
+                                key={rating}
                                 onChange={onChange}
-                                value={rating}
+                                value={ratings}
                                 label={ratingDiamonds(rating)}
+                                name="ratings"
                             />
                         )         
                     })}
@@ -58,7 +61,8 @@ const Filter = ({onChange}) => {
 }
 
 Filter.propTypes = {
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    filters: PropTypes.array.isRequired
 };
 
 export default Filter;

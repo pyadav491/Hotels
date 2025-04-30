@@ -279,7 +279,7 @@ h5 {
     display: none;
 
     
-    @include responsive(desktop) {
+    @include responsive(tablet) {
         font-size: $mini-font-size;
         color: $text-color-secondary;
         display: block;
@@ -355,6 +355,10 @@ h5 {
     }
 }
 
+.c-checkbox__text {
+    font-size: $mini-font-size;
+}
+
 .c-checkbox__label {
     @include alignFlex();
 }
@@ -387,12 +391,19 @@ h5 {
 .c-accordion__icon {
     width: 0;
     height: 0;
-    border-top: 4px solid $text-color-secondary;;
-    border-bottom: 4px solid transparent;
+    border-bottom: 4px solid $text-color-secondary;;
+    border-top: 4px solid transparent;
     display: inline-block;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     margin-right: 0.5rem;
+    margin-top: -0.5rem;
+    transition: transform 0.3s ease;
+
+    &--expand {
+        transform: rotate(180deg);
+        margin-top: 0.4rem;
+    }
 }
 
 .c-accordion__header {
@@ -407,4 +418,21 @@ h5 {
 
 .c-accordion__content {
     padding: 0 1.2rem;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slidedown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.c-hotel-detail__image {
+    width: 500px;
 }
